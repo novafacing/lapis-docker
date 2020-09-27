@@ -1,14 +1,16 @@
 #!/usr/bin/make -f
 
-IMAGE := mileschou/lapis
-.PHONY: alpine debian
+IMAGE := novafacing/lapis
+.PHONY: alpine
 
 # ------------------------------------------------------------------------------
 
-all: alpine debian
+all: alpine
 
 alpine:
 	docker build -t=$(IMAGE):alpine -f alpine/Dockerfile .
 
-debian:
-	docker build -t=$(IMAGE):latest -f Dockerfile .
+run:
+	docker run -v $(pwd)/src:/app -p 8080:8080 novafacing/lapis:alpine
+
+
