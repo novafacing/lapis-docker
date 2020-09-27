@@ -7,10 +7,11 @@ IMAGE := novafacing/lapis
 
 all: alpine
 
-alpine:
-	docker build -t=$(IMAGE):alpine -f alpine/Dockerfile .
+build:
+	docker build -t=$(IMAGE):alpine  .
 
 run:
-	docker run -v $(pwd)/src:/app -p 8080:8080 novafacing/lapis:alpine
+	moonc $(shell pwd)/app/*.moon
+	docker run -v $(shell pwd)/app:/app -p 8080:8080 $(IMAGE):alpine
 
 
